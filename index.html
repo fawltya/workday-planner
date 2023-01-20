@@ -1,0 +1,75 @@
+i<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Work Day Scheduler</title>
+  </head>
+
+  <body>
+    <header class="jumbotron">
+      <h1 class="display-3">Work Day Scheduler</h1>
+      <p class="lead">A simple calendar app for scheduling your work day</p>
+      <p id="currentDay" class="lead"></p>
+    </header>
+    <div class="container bg-dark pt-3">
+      <!-- Timeblocks go here -->
+      <!-- Create 9 timeblocks-->
+      <form class="planner-input-row d-flex flex-row  align-items-center p-3">
+        <div class="planner-time-div form-group d-flex align-items-center border text-light p-3">
+          <span class="planner-time-span" id="9am-span">09:00</span>
+        </div>
+        <div class="planner-textarea-div form-group w-100 ml-3 mr-3">
+          <textarea class="planner-textarea form-control" id="9am-form" rows="3"></textarea>
+        </div>
+        <div class="planner-button-div form-group ">
+          <button type="submit" class="planner-button btn btn-primary" id="9am-button">Submit</button>
+        </div>  
+      </form>
+      <hr>
+      <form class="planner-input-row d-flex flex-row align-items-center p-3 w-100">
+        <div class="planner-time-div form-group d-flex align-items-center border text-light p-3">
+          <span class="planner-time-span">10:00</span>
+        </div>
+        <div class="planner-textarea-div form-group w-100 ml-3 mr-3">
+          <textarea class="planner-textarea form-control" rows="3"></textarea>
+        </div>
+        <div class="planner-button-div form-group ">
+          <button type="submit" class="planner-button btn btn-primary">Submit</button>
+        </div>  
+      </form>
+      <hr>
+      <form class="planner-input-row d-flex flex-row align-items-center p-3 w-100">
+        <div class="planner-time-div form-group d-flex align-items-center border text-light p-3">
+          <span class="planner-time-span">11:00</span>
+        </div>
+        <div class="planner-textarea-div form-group w-100 ml-3 mr-3">
+          <textarea class="planner-textarea form-control" rows="3"></textarea>
+        </div>
+        <div class="planner-button-div form-group ">
+          <button type="submit" class="planner-button btn btn-primary">Submit</button>
+        </div>  
+      </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
