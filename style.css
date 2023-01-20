@@ -1,7 +1,23 @@
+root {
+  --random-var { rgb(21, 50, 202)}
+  --present-color { color: rgb(51, 0, 170)}
+  --future-color { color: rgb(24, 255, 32)}
+}
+
+body {
+  background-color:#000000;
+
+ }
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  background-color:#000000;
+}
+
+p, h1, h2, h3, h4, h5 {
+  color: white;
 }
 
 textarea {
@@ -69,3 +85,4 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
