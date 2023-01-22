@@ -10,7 +10,7 @@ showDate()
 setInterval(showDate, 1000);
 var now = moment().format('H') // current hour
 
-timeblocks = $('.planner-input-row')
+var timeblocks = $('.planner-input-row')
 
 timeblocks.each(function() {
     var hour = $(this).attr('data-hour');
@@ -25,65 +25,112 @@ timeblocks.each(function() {
         $(this).css('background-color', 'purple')
         
     }
-    return thisHour = hour;
+    // return thisHour = hour;
 
 })
 
 var inputs = [];
-var input = $('input')
 
-$('.planner-input-row').on( 'submit', function(event) {
+timeblocks.on( 'submit', function(event) {
     event.preventDefault();
-    // for (var i = 0; i < 2; i++) {
-    inputs.push('time: ' + thisHour, 'input: ' + input.val());
-    console.log(inputs)
-    $('input').val('')
-    // console.log(input)
-//   }
-} );
+    handleForm(this);
+    $('.prevInput').empty(); // Removes all current divs
+    displayInputs();
+});
 
-//   console.log(inputs)
-
-
-
-
-// 3. Save input to local storage
-//      create variable (an array) called inputs that will store all of the input data
-//      Add event listener to all save button
-//          Add event.preventDefault inside the click event listener
-//          Push the input value to inputs array with the format of { time: xx, input: xxx }
-//              Get the input value
-//              Get the hour value
-//              Push to the inputs array if the hour entry not exist yet in the array
-//              Replace the existing entry if the hour entry exist in the array
-//          Save inputs variable to local storage
-//              Stringify the inputs array
-//          Show feedback message to the user (optional)
-//          The feedback need to be dissappeared automatically
-//
-//      Example of inputs array format
-//      var inputs = [{
-//        time: 9,
-//        input: 'Meeting',
-//      },{
-//        time: 10,
-//        input: 'Coffee',
-//      },...];
+function handleForm(timeblock) {
+    var inputField = $(timeblock).find('input');
+    var input = {
+        time: $(timeblock).attr('data-hour'),
+        inputText: inputField.val()
+    }
+    var previousInputs = JSON.parse(localStorage.getItem("inputs")) || [];
+    previousInputs.push(input);
+    localStorage.setItem("inputs", JSON.stringify(previousInputs));
+    inputField.val('');
+    // displayInputs()
+}
 
 
 
+function displayInputs() {
+    var localStorageInput = JSON.parse(localStorage.getItem('inputs'));
+    if(localStorageInput){
+        localStorageInput.forEach(function(input) {
+            var timeblock = $(`.planner-input-row[data-hour="${input.time}"]`);
+            var appendInputDiv = $('<div class="prevInput column"></div>');
+            appendInputDiv.append(input.inputText);
+            // appendInputDiv.insertBefore(timeblock.planner-input);
+            // appendInputDiv.append(input.inputText + "<button class='doneTick'></button>"); // tick button
+            timeblock.append(appendInputDiv);
+        });
+    }
+}
 
-// var formInput = $('planner-input-row')
-// var plannerSubmitValue = $('#9am-form');
 
-// var formHandle = function (event) {
-//     event.preventDefault();
-//     var plannerSubmit = plannerSubmitValue.val();
 
-//     plannerSubmit.appendTo(plannerSubmitValue);
+$(document).ready(function() {
+    displayInputs()
+});
 
-// }
-// // formHandle();
 
-// // formEl.on('submit', handleFormSubmit);
-// formInput.on('submit', formHandle);
+
+// var localStorageInput = JSON.parse(localStorage.getItem('inputs'))
+// console.log(localStorageInput)
+// var appendInputDiv = $('<div class="prevInput"></div>')
+// appendInputDiv.text(localStorageInput);
+// timeblocks.append(appendInputDiv)
+
+
+
+
+// $(document).ready(function() {
+//     var localStorageInput = JSON.parse(localStorage.getItem('inputs'))
+//     localStorageInput.forEach(function(input) {
+//         var timeblock = $(`.planner-input-row[data-hour="${input.time}"]`);
+//         var appendInputDiv = $('<div class="prevInput"></div>')
+//         appendInputDiv.append(input.inputText + "<button class='doneTick' type='button'></button>");
+//         timeblock.append(appendInputDiv)
+//     });
+// });
+
+$('#clear-all').on( 'click', function(event) {
+    event.preventDefault();
+    localStorage.removeItem("inputs");
+    $('.prevInput').remove();
+    inputs = [];
+});
+
+
+
+// done tick (not working)
+$(document).on('click', '.doneTick', function(event) {
+    event.preventDefault();
+//     var inputToRemove = $(this).parent(); // this refers to the button that was clicked
+//     var time = inputToRemove.attr("data-hour"); // get the data-time attribute of the parent element
+//     var inputs = JSON.parse(localStorage.getItem("inputs")) || [];
+//     inputs = inputs.filter(function(input){
+//         return input.time !== time;
+//     });
+//     localStorage.setItem("inputs", JSON.stringify(inputs));
+//     inputToRemove.remove();
+//     // displayInputs()
+});
+
+
+
+
+
+// 4. Load input from local storage when page load/refresh if there's any data in local storage
+//      var localStorageInput = get data from local storage
+//      check if localStorageInput exist, if it is
+//          var parsedLocalStorageInput = parse localStorageInput
+//          populate the inputs with the value from parsedLocalStorageInput
+//          inputs.forEach(function(input) {
+//              input => {
+//                time: 9,
+//                input: 'Meeting',
+//              }
+//              $('.timeblock[data-hour="' + input.time + '"] textarea').val(input.input)
+//          })
+//      if theres no data in local storage, do nothing
