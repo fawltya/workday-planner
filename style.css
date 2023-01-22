@@ -1,8 +1,11 @@
-root {
-  --random-var: red;
+:root {
+  --random-var: rgb(77, 19, 19);
   --present-color: green;
   --future-color: #eae318;
   --black: #000000;
+  --primary: #2f4858;
+  --seamus-dark: #121b21;
+  --primary-light: #cddbe4;
 }
 
 body {
@@ -19,6 +22,11 @@ body {
 
 p, h1, h2, h3, h4, h5 {
   color: white;
+}
+
+.schedule-item {
+  background-color: var(--primary);
+  padding: 5px
 }
 
 textarea {
@@ -78,7 +86,7 @@ textarea {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #06aed5;
+  background-color: var(--seamus-dark);
   color: white;
 }
 

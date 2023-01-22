@@ -18,11 +18,11 @@ timeblocks.each(function() {
     now = parseInt(now, 10)
 
     if (hour < now) {
-        $(this).css('background-color', 'red')
+        $(this).css('background-color', 'var(--red)')
     } else if (hour == now) {
-        $(this).css('background-color', 'green')
+        $(this).css('background-color', 'var(--green)')
     } else {
-        $(this).css('background-color', 'purple')
+        $(this).css('background-color', 'var(--purple)')
         
     }
     // return thisHour = hour;
@@ -34,7 +34,7 @@ var inputs = [];
 timeblocks.on( 'submit', function(event) {
     event.preventDefault();
     handleForm(this);
-    $('.prevInput').empty(); // Removes all current divs
+    $('.schedule-item').empty(); // Removes all current divs
     displayInputs();
 });
 
@@ -58,11 +58,12 @@ function displayInputs() {
     if(localStorageInput){
         localStorageInput.forEach(function(input) {
             var timeblock = $(`.planner-input-row[data-hour="${input.time}"]`);
-            var appendInputDiv = $('<div class="prevInput column"></div>');
+            var appendInputDiv = $('<div class="schedule-item"></div>');
             appendInputDiv.append(input.inputText);
             // appendInputDiv.insertBefore(timeblock.planner-input);
             // appendInputDiv.append(input.inputText + "<button class='doneTick'></button>"); // tick button
-            timeblock.append(appendInputDiv);
+            // timeblock.append(appendInputDiv);
+            timeblock.find('.planner-textarea-div').append(appendInputDiv);
         });
     }
 }
@@ -97,15 +98,15 @@ $(document).ready(function() {
 $('#clear-all').on( 'click', function(event) {
     event.preventDefault();
     localStorage.removeItem("inputs");
-    $('.prevInput').remove();
+    $('.schedule-item').remove();
     inputs = [];
 });
 
 
 
 // done tick (not working)
-$(document).on('click', '.doneTick', function(event) {
-    event.preventDefault();
+// $(document).on('click', '.doneTick', function(event) {
+//     event.preventDefault();
 //     var inputToRemove = $(this).parent(); // this refers to the button that was clicked
 //     var time = inputToRemove.attr("data-hour"); // get the data-time attribute of the parent element
 //     var inputs = JSON.parse(localStorage.getItem("inputs")) || [];
@@ -115,7 +116,7 @@ $(document).on('click', '.doneTick', function(event) {
 //     localStorage.setItem("inputs", JSON.stringify(inputs));
 //     inputToRemove.remove();
 //     // displayInputs()
-});
+// });
 
 
 
