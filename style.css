@@ -1,7 +1,8 @@
 root {
-  --random-var { rgb(21, 50, 202)}
-  --present-color { color: rgb(51, 0, 170)}
-  --future-color { color: rgb(24, 255, 32)}
+  --random-var: red;
+  --present-color: green;
+  --future-color: #eae318;
+  --black: #000000;
 }
 
 body {
